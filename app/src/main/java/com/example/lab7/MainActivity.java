@@ -14,6 +14,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -40,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
         requestNeededPermission();
     }
 
+
     private void requestNeededPermission() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED) {
@@ -61,29 +63,36 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+
     private void writeFile(String data) {
-        String file = Environment.getExternalStorageDirectory() + "/test.txt";
-        try (FileOutputStream os = new FileOutputStream(file)) {
-            os.write(data.getBytes());
-            os.flush();
+
+        File file = new File(getExternalFilesDir(null), "test.txt");
+
+        try (FileOutputStream fos = new FileOutputStream(file)) {
+            fos.write(data.getBytes());
+            fos.flush();
             Toast.makeText(this, "Data written to file", Toast.LENGTH_LONG).show();
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
+            Toast.makeText(this, "Error writing to file", Toast.LENGTH_SHORT).show();
         }
     }
 
+
     private String readFile() {
         String result = "";
-        String file = Environment.getExternalStorageDirectory() + "/test.txt";
-        try (FileInputStream is = new FileInputStream(file)) {
+        File file = new File(getExternalFilesDir(null), "test.txt");
+
+        try (FileInputStream fis = new FileInputStream(file)) {
             ByteArrayOutputStream bos = new ByteArrayOutputStream();
             int ch;
-            while ((ch = is.read()) != -1) {
+            while ((ch = fis.read()) != -1) {
                 bos.write(ch);
             }
             result = bos.toString();
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
+            Toast.makeText(this, "Error reading from file", Toast.LENGTH_SHORT).show();
         }
         return result;
     }
