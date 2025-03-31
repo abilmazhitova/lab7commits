@@ -1,4 +1,5 @@
 package com.example.lab7;
+
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
