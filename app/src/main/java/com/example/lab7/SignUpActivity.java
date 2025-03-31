@@ -1,15 +1,14 @@
-package com.example.lab7 ;
+package com.example.lab7;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
-import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.lab7.R;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class SignUpActivity extends AppCompatActivity {
 
@@ -30,25 +29,21 @@ public class SignUpActivity extends AppCompatActivity {
         edConfirmPassword = findViewById(R.id.ed_confirm_pwd);
         btnCreateUser = findViewById(R.id.btn_create_user);
 
-        btnCreateUser.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String strPassword = edPassword.getText().toString();
-                String strConfirmPassword = edConfirmPassword.getText().toString();
-                String strUsername = edUsername.getText().toString();
+        btnCreateUser.setOnClickListener(view -> {
+            String strPassword = edPassword.getText().toString();
+            String strConfirmPassword = edConfirmPassword.getText().toString();
+            String strUsername = edUsername.getText().toString();
 
-                if (strPassword.equalsIgnoreCase(strConfirmPassword)) {
-                    SharedPreferences credentials = getSharedPreferences(CREDENTIAL_SHARED_PREF, Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor = credentials.edit();
-                    editor.putString("Password", strPassword);
-                    editor.putString("Username", strUsername);
-                    editor.apply();
+            if (strPassword.equals(strConfirmPassword)) {
+                SharedPreferences credentials = getSharedPreferences(CREDENTIAL_SHARED_PREF, Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = credentials.edit();
+                editor.putString("Username", strUsername);
+                editor.putString("Password", strPassword);
+                editor.apply();
 
-                    Toast.makeText(SignUpActivity.this, "User Created Successfully", Toast.LENGTH_SHORT).show();
-                    finish();
-                } else {
-                    Toast.makeText(SignUpActivity.this, "Passwords do not match", Toast.LENGTH_SHORT).show();
-                }
+                Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
     }

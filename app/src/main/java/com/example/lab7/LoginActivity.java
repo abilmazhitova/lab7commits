@@ -8,9 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.lab7.R;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -31,33 +30,23 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin = findViewById(R.id.btn_login);
         btnSignUp = findViewById(R.id.btn_signup);
 
-        btnSignUp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity.this, com.example.lab7git.SignUpActivity.class);
-                startActivity(intent);
-            }
+        btnSignUp.setOnClickListener(view -> {
+            Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
+            startActivity(intent);
         });
 
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                SharedPreferences credentials = getSharedPreferences(CREDENTIAL_SHARED_PREF, Context.MODE_PRIVATE);
-                String strUsername = credentials.getString("Username", null);
-                String strPassword = credentials.getString("Password", null);
+        btnLogin.setOnClickListener(view -> {
+            SharedPreferences credentials = getSharedPreferences(CREDENTIAL_SHARED_PREF, Context.MODE_PRIVATE);
+            String strUsername = credentials.getString("Username", "");
+            String strPassword = credentials.getString("Password", "");
 
-                String username_from_ed = edUsername.getText().toString();
-                String password_from_ed = edPassword.getText().toString();
+            String username_from_ed = edUsername.getText().toString();
+            String password_from_ed = edPassword.getText().toString();
 
-                if (strUsername != null && strUsername.equalsIgnoreCase(username_from_ed)) {
-                    if (strPassword != null && strPassword.equalsIgnoreCase(password_from_ed)) {
-                        Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(LoginActivity.this, "Login Failed", Toast.LENGTH_SHORT).show();
-                    }
-                } else {
-                    Toast.makeText(LoginActivity.this, "Login Failed", Toast.LENGTH_SHORT).show();
-                }
+            if (strUsername.equals(username_from_ed) && strPassword.equals(password_from_ed)) {
+                Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(LoginActivity.this, "Login Failed", Toast.LENGTH_SHORT).show();
             }
         });
     }
