@@ -1,4 +1,4 @@
-package com.example.lab7git;
+package com.example.lab7;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.lab7.R;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -32,7 +34,7 @@ public class LoginActivity extends AppCompatActivity {
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
+                Intent intent = new Intent(LoginActivity.this, com.example.lab7git.SignUpActivity.class);
                 startActivity(intent);
             }
         });

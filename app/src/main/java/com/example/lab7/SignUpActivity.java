@@ -1,4 +1,4 @@
-package com.example.lab7git ;
+package com.example.lab7 ;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -8,6 +8,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.lab7.R;
 
 public class SignUpActivity extends AppCompatActivity {
 
