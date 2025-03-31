@@ -1,4 +1,4 @@
-package com.example.lab7;
+package com.example.lab7git;
 
 import android.content.Context;
 import android.content.Intent;
