@@ -45,6 +45,11 @@ public class LoginActivity extends AppCompatActivity {
 
             if (strUsername.equals(username_from_ed) && strPassword.equals(password_from_ed)) {
                 Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+
+                // Переход на экран работы с файлами после успешного логина
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();  // Закрыть текущую активность, чтобы вернуться не было возможно
             } else {
                 Toast.makeText(LoginActivity.this, "Login Failed", Toast.LENGTH_SHORT).show();
             }
